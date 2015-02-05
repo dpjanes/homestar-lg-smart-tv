@@ -48,6 +48,14 @@ exports.listLaunchPoints = function (client, callback) {
 }
 
 /**
+ *  More or less corresponding to Bands (sigh)
+ */
+exports.getForegroundAppInfo = function (client, callback) {
+    _lg_doit(client, 'ssap://com.webos.applicationManager/getForegroundAppInfo', {}, callback);
+}
+
+
+/**
  *  Get the TV volume status
  */
 exports.getVolume = function (client, callback) {
