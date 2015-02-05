@@ -20,7 +20,8 @@ wrapper.on('discovered', function(bridge) {
     model.on_meta(function(model) {
         console.log("+ meta\n ", model.meta().state());
     });
-    model.set('volume', 0.25);
+    model.set('mute', false);
+    model.set('volume', 35);
     
     console.log("+ discovered\n ", model.meta().state(), "\n ", model.thing_id());
 })

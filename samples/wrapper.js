@@ -12,8 +12,8 @@ wrapper = iotdb.bridge_wrapper(new LGSmartTVBridge({
 wrapper.on('discovered', function(bridge) {
     console.log("+ discovered\n ", bridge.meta());
     bridge.push({
-        volume: 0.2,
-        band: "DVD",
+        volume: 19,
+        band: "netflix",
     });
 })
 wrapper.on('state', function(bridge, state) {
