@@ -34,25 +34,6 @@ var logger = bunyan.createLogger({
     module: 'LGSmartTVBridge',
 });
 
-/*
-      "uuid": "c2dae0fb-113a-a62b-6819-076e04a2e6fd",
-      "udn": "uuid:c2dae0fb-113a-a62b-6819-076e04a2e6fd",
-      "forgotten": false,
-      "last_seen": 1423088999360,
-      "location": "http://192.168.0.25:1285/",
-      "deviceType": "urn:schemas-upnp-org:device:Basic:1",
-      "friendlyName": "LG Smart+ TV",
-      "manufacturer": "LG Electronics",
-      "manufacturerUrl": "http://www.lge.com",
-      "modelNumber": "55LB6300-UQ",
-      "modelDescription": "",
-      "modelName": "LG Smart TV",
-      "modelUrl": "http://www.lge.com",
-      "softwareVersion": null,
-      "hardwareVersion": null,
- */
-
-
 /**
  *  EXEMPLAR and INSTANCE
  *  <p>
@@ -71,10 +52,16 @@ var LGSmartTVBridge = function(paramd, native) {
     self.paramd = _.defaults(paramd, {
         number: 0,
         poll: 30,
+        retry: 15,
         upnpn: true,
     });
     self.native = native;
     self.stated = {};
+
+    if (self.native) {
+        self.queued = [];
+        self.client = null;
+    }
 };
 
 /* --- lifecycle --- */
@@ -179,34 +166,24 @@ LGSmartTVBridge.prototype.push = function(pushd) {
         return;
     }
 
-    var client = new LGClient();
-    client.connect(self.native.host, function (error) {
-        if (error) {
-            logger.info({
-                method: "push/connect(error)",
-                unique_id: self.unique_id,
-                error: error,
-            }, "called");
-            return;
+    if (pushd.band !== undefined) {
+        // XXX - THIS NEEDS TO BE SEMANTIC
+        var launch = pushd.band.toLowerCase();
+        if (launch === "hdmi1") {
+            launch = "com.webos.app.hdmi1";
+        } else if (launch === "hdmi2") {
+            launch = "com.webos.app.hdmi2";
+        } else if (launch === "hdmi3") {
+            launch = "com.webos.app.hdmi3";
+        } else if (launch === "tv") {
+            launch = "com.webos.app.livetv";
+        } else if (launch === "netflix") {
+            launch = "netflix";
+        } else {
+            launch = pushd.band;
         }
 
-        if (pushd.band !== undefined) {
-            // XXX - THIS NEEDS TO BE SEMANTIC
-            var launch = pushd.band.toLowerCase();
-            if (launch === "hdmi1") {
-                launch = "com.webos.app.hdmi1";
-            } else if (launch === "hdmi2") {
-                launch = "com.webos.app.hdmi2";
-            } else if (launch === "hdmi3") {
-                launch = "com.webos.app.hdmi3";
-            } else if (launch === "tv") {
-                launch = "com.webos.app.livetv";
-            } else if (launch === "netflix") {
-                launch = "netflix";
-            } else {
-                launch = pushd.band;
-            }
-
+        self._queue("set-band", function(client) {
             LG.launch(client, launch, function (error, d) {
                 logger.info({
                     method: "push/connect/band",
@@ -215,9 +192,11 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     band: pushd.band,
                 }, "called");
             });
-        }
+        });
+    }
 
-        if (pushd.channel !== undefined) {
+    if (pushd.channel !== undefined) {
+        self._queue("set-channel", function(client) {
             LG.setChannel(client, pushd.channel, function (error, d) {
                 logger.info({
                     method: "push/connect/setChannel",
@@ -225,9 +204,11 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     channel: pushd.channel,
                 }, "called");
             });
-        }
+        });
+    }
 
-        if (pushd.volume !== undefined) {
+    if (pushd.volume !== undefined) {
+        self._queue("set-volume", function(client) {
             LG.setVolume(client, pushd.volume, function (error, d) {
                 logger.info({
                     method: "push/connect/setVolume",
@@ -235,9 +216,11 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     volume: pushd.volume,
                 }, "called");
             });
-        }
+        });
+    }
 
-        if (pushd.mute !== undefined) {
+    if (pushd.mute !== undefined) {
+        self._queue("set-mute", function(client) {
             LG.setMute(client, pushd.mute, function (error, d) {
                 logger.info({
                     method: "push/connect/setMute",
@@ -245,8 +228,8 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     mute: pushd.mute,
                 }, "called");
             });
-        }
-    });
+        });
+    }
 };
 
 /**
@@ -260,69 +243,63 @@ LGSmartTVBridge.prototype.pull = function() {
         return;
     }
 
-    /*
-    logger.info({
-        method: "pull",
-        unique_id: self.unique_id
-    }, "called");
+    self._queue("get-channel", function(client) {
+        LG.getChannel(client, function (error, d) {
+            logger.debug({
+                method: "push/connect/getChannel",
+                unique_id: self.unique_id,
+                d: d
+            }, "result");
 
-    var qitem = {
-        id: self.paramd.number + OFFSET_PULL,
-        run: function () {
-            var url = self.url;
-            logger.info({
-                method: "pull",
-                url: url
-            }, "do");
-            unirest
-                .get(url)
-                .headers({
-                    'Accept': 'application/json'
-                })
-                .end(function (result) {
-                    self.queue.finished(qitem);
-                    if (!result.ok) {
-                        logger.error({
-                            method: "pull",
-                            url: url,
-                            result: result
-                        }, "not ok");
-                        return;
-                    }
+            if (d.returnValue !== true) {
+                return;
+            }
 
-                    if (result.body && result.body.state) {
-                        var changed = false;
-                        var state = result.body.state;
-                        if (state.on !== undefined) {
-                            var value_on = state.on ? true : false;
-                            if (value_on !== self.stated['on-value']) {
-                                self.stated['on-value'] = value_on;
-                                changed = true;
-                            }
-                        }
-                        if ((state.xy !== undefined) && (state.bri !== undefined)) {
-                            value_hex = _h2c(state);
-                            if (value_hex !== self.stated['color-value']) {
-                                self.stated['color-value'] = value_hex;
-                                changed = true;
-                            }
-                        }
+            if (d.channelNumber !== self.stated['channel-value']) {
+                self.stated['channel-value'] = d.channelNumber;
+                self.pulled(self.stated);
+            }
+        });
+    });
 
-                        if (changed) {
-                            self.pulled(self.stated);
+    self._queue("get-mute", function(client) {
+        LG.getMute(client, function (error, d) {
+            logger.debug({
+                method: "push/connect/getMute",
+                unique_id: self.unique_id,
+                d: d
+            }, "result");
 
-                            logger.info({
-                                method: "pull",
-                                light: self.paramd.number,
-                                pulld: self.stated,
-                            }, "pulled");
-                        }
-                    }
-                });
-        }
-    };
-    self.queue.add(qitem);
-    */
+            if (d.returnValue !== true) {
+                return;
+            }
+
+            if (d.mute !== self.stated.mute) {
+                self.stated.mute = d.mute;
+                self.pulled(self.stated);
+            }
+        });
+    });
+
+    self._queue("get-volume", function(client) {
+        LG.getVolume(client, function (error, d) {
+            logger.debug({
+                method: "push/connect/getVolume",
+                unique_id: self.unique_id,
+                d: d
+            }, "result");
+
+            if (d.returnValue !== true) {
+                return;
+            }
+
+            if (d.volume !== self.stated.volume) {
+                self.stated.volume = d.volume;
+                self.pulled(self.stated);
+            }
+        });
+    });
+
     return self;
 };
 
@@ -385,8 +362,59 @@ LGSmartTVBridge.prototype.pulled = function(pulld) {
     throw new Error("LGSmartTVBridge.pulled not implemented");
 };
 
+/* -- internals -- */
+LGSmartTVBridge.prototype._queue = function(qid, f) {
+    var self = this;
+
+    self.queued[qid] = f;
+    self._run();
+};
+
+LGSmartTVBridge.prototype._run = function() {
+    var self = this;
+
+    // anything queued?
+    var f = null;
+    for (var qid in self.queued) {
+        f = self.queued[qid];
+        if (f) {
+            break;
+        }
+    }
+
+    if (!f) {
+        return;
+    }
+
+    // connect if not, otherwise run
+    if (!self.client) {
+        var _on_close = function() {
+            if (!self.client) {
+                return;
+            }
+
+            self.client.removeAllListeners();
+            self.client = null;
+        };
+
+        self.client = new LGClient();
+        self.client.on('error', _on_close);
+        self.client.on('close', _on_close);
+        self.client.connect(self.native.host, function () {
+            return self._run();
+        });
+    } else if (!self.client.ready) {
+        return;
+    } else {
+        delete self.queued[qid];
+
+        f(self.client);
+        self._run();
+    }
+};
+
+
 /*
  *  API
  */
 exports.Bridge = LGSmartTVBridge;
-

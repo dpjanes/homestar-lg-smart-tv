@@ -28,6 +28,7 @@ var logger = bunyan.createLogger({
 var LGClient = function () {
     events.EventEmitter.call(this);
 
+    this.ready = false;
     this.requestId = 1;
     this.requests = {};
     this.manifest = {
@@ -60,6 +61,7 @@ util.inherits(LGClient, events.EventEmitter);
 
 LGClient.prototype.connect = function (ip, cb) {
     // console.log("HERE:A.1", ip);
+    // XXX - probably does nothing useful?
     if (cb) {
         var handler = function () {
             // console.log("HERE:AAA ---------", arguments);
@@ -79,7 +81,7 @@ LGClient.prototype.connect = function (ip, cb) {
     // console.log("HERE:A.2", ip);
 
     this.ws.on('open', function () {
-        console.log("HERE:B.1:open");
+        // console.log("HERE:B.1:open");
         logger.info({
             method: "connect/on(open)",
         }, "called");
@@ -116,6 +118,7 @@ LGClient.prototype.connect = function (ip, cb) {
             }
         } else if (message.type === "registered") {
             this.emit('connected');
+            this.ready = true;
 
             if (cb !== undefined) {
                 cb();
@@ -126,11 +129,13 @@ LGClient.prototype.connect = function (ip, cb) {
 
     this.ws.on('error', function (err) {
         // console.log("HERE:B.1:error", err);
+        this.ready = false;
         this.emit('error', err);
     }.bind(this));
 
     this.ws.on('close', function () {
         // console.log("HERE:B.1:close");
+        this.ready = false;
         this.emit('close', 'connection closed');
     }.bind(this));
 };
