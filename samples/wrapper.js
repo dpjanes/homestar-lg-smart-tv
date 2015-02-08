@@ -4,12 +4,10 @@
 
 var iotdb = require("iotdb");
 
-var LGSmartTVBridge = require('../LGSmartTVBridge').Bridge;
+var LGSmartTV = require('../LGSmartTV');
 
-wrapper = iotdb.bridge_wrapper(new LGSmartTVBridge({
-    mdns: true
-}));
-wrapper.on('discovered', function(bridge) {
+wrapper = iotdb.bridge_wrapper(LGSmartTV.binding);
+wrapper.on('bridge', function(bridge) {
     console.log("+ discovered\n ", bridge.meta());
     bridge.push({
         volume: 19,

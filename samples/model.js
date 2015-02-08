@@ -4,16 +4,10 @@
 
 var iotdb = require("iotdb");
 
-var LGSmartTVBridge = require('../LGSmartTVBridge').Bridge;
-var LGSmartTVModel = require('../LGSmartTVModel').Model;
+var LGSmartTV = require('../LGSmartTV');
 
-wrapper = iotdb.bridge_wrapper(new LGSmartTVBridge({
-    mdns: true
-}));
-wrapper.on('discovered', function(bridge) {
-    var model = new LGSmartTVModel();
-    model.bind_bridge(bridge);
-
+wrapper = iotdb.bridge_wrapper(LGSmartTV.binding);
+wrapper.on('model', function(model) {
     model.on_change(function(model) {
         console.log("+ state\n ", model.state());
     });

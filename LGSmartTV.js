@@ -17,3 +17,8 @@ exports.Model = iotdb.make_model('LGSmartTV')
     .io("volume", "volume-value", iotdb.percent.volume)
     .io("mute", "mute-value", iotdb.boolean.mute)
     .make()
+
+exports.binding = {
+    bridge: require('./LGSmartTVBridge').Bridge,
+    model: exports.Model,
+};
