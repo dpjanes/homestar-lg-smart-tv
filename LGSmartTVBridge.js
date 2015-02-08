@@ -101,7 +101,7 @@ LGSmartTVBridge.prototype.discover = function() {
  *  INSTANCE
  *  This is called when the Bridge is no longer needed. When
  */
-LGSmartTVBridge.prototype.connect = function() {
+LGSmartTVBridge.prototype.connect = function(connectd) {
     var self = this;
     if (!self.native) {
         return;
