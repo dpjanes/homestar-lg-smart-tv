@@ -46,10 +46,10 @@ var logger = bunyan.createLogger({
  *  <li><code>disconnnected</code> - this has been disconnected from a Thing
  *  </ul>
  */
-var LGSmartTVBridge = function(paramd, native) {
+var LGSmartTVBridge = function(initd, native) {
     var self = this;
 
-    self.paramd = _.defaults(paramd, {
+    self.initd = _.defaults(initd, {
         number: 0,
         poll: 30,
         retry: 15,
@@ -91,7 +91,7 @@ LGSmartTVBridge.prototype.discover = function() {
             method: "discover",
         }, "found LGSmartTV");
 
-        self.discovered(new LGSmartTVBridge(self.paramd, native));
+        self.discovered(new LGSmartTVBridge(self.initd, native));
     });
 
     cp.search();
@@ -113,7 +113,7 @@ LGSmartTVBridge.prototype.connect = function() {
 
 LGSmartTVBridge.prototype._setup_polling = function() {
     var self = this;
-    if (!self.paramd.poll) {
+    if (!self.initd.poll) {
         return;
     }
 
@@ -124,7 +124,7 @@ LGSmartTVBridge.prototype._setup_polling = function() {
         }
 
         self.pull();
-    }, self.paramd.poll * 1000);
+    }, self.initd.poll * 1000);
 };
 
 LGSmartTVBridge.prototype._forget = function() {
