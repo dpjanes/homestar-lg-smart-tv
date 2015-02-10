@@ -20,7 +20,7 @@
  *  limitations under the License.
  */
 
-"use struct";
+"use strict";
 
 var iotdb = require('iotdb')
 var _ = iotdb.helpers;
