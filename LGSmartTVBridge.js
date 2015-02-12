@@ -22,8 +22,8 @@
 
 "use strict";
 
-var iotdb = require('iotdb')
-var _ = iotdb.helpers;
+var homestar = require('homestar')
+var _ = homestar._;
 
 var LGClient = require('./lg-client').LGClient;
 var LG = require('./lg-commands');
@@ -78,7 +78,7 @@ var LGSmartTVBridge = function(initd, native) {
 LGSmartTVBridge.prototype.discover = function() {
     var self = this;
 
-    var cp = iotdb.upnp.control_point();
+    var cp = homestar.upnp.control_point();
 
     cp.on("device", function (native) {
         if (native.deviceType !== 'urn:schemas-upnp-org:device:Basic:1') {

@@ -6,16 +6,16 @@
  *  2014-12-09
  */
 
-var iotdb = require("iotdb")
+var homestar = require("homestar")
 
-exports.Model = iotdb.make_model('LGSmartTV')
+exports.Model = homestar.make_model('LGSmartTV')
     .facet(":media.tv")
     .product("http://www.lg.com/us/experience-tvs/smart-tv")
     .name("LG Smart TV (WebOs)")
-    .io("band", "band-value", iotdb.string.band)
-    .io("channel", "channel-value", iotdb.integer.channel)
-    .io("volume", "volume-value", iotdb.percent.volume)
-    .io("mute", "mute-value", iotdb.boolean.mute)
+    .io("band", "band-value", homestar.string.band)
+    .io("channel", "channel-value", homestar.integer.channel)
+    .io("volume", "volume-value", homestar.percent.volume)
+    .io("mute", "mute-value", homestar.boolean.mute)
     .make()
 
 exports.binding = {
