@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+var homestar = require('homestar');
+var bunyan = homestar.bunyan;
+
 var events = require('events');
 var WebSocket = require('ws');
 var util = require('util');
 
-var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'homestar-lg-smart-tv',
     module: 'lg-finder',

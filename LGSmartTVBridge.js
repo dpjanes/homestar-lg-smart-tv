@@ -24,11 +24,11 @@
 
 var homestar = require('homestar')
 var _ = homestar._;
+var bunyan = homestar.bunyan;
 
 var LGClient = require('./lg-client').LGClient;
 var LG = require('./lg-commands');
 
-var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'homestar-lg-smart-tv',
     module: 'LGSmartTVBridge',
