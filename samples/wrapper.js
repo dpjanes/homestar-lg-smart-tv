@@ -1,4 +1,5 @@
 /*
+ *  NOTE: the best way to use this is in "model.js"
  *  Use a "bridge_wrapper", which handles all injections
  */
 

@@ -1,3 +1,7 @@
+/*
+ *  NOTE: the best way to use this is in "model.js"
+ */
+
 "use struct";
 
 var LGClient = require('./lg-client').LGClient;

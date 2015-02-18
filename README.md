@@ -3,7 +3,8 @@
 Connect and control LG SmartTV with HomeStar and IOTDB. 
 Note that we can't turn these on and off.
 
-See <a href="samples/">the samples</a> for details how to add to your project.
+See <a href="samples/">the samples</a> for details how to add to your project,
+particularly <code>model.js</code>.
 
 ## LGSmartTVModel
 

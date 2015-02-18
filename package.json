@@ -1,0 +1,22 @@
+{
+    "author": "David P. Janes <davidjanes@iotdb.org> (https://iotdb.org)", 
+    "bugs": {
+        "url": "https://github.com/dpjanes/homestar-lg-smart-tv/issues"
+    }, 
+    "dependencies": {
+        "homestar": ">=0.0.46", 
+        "ws": "~0.7.1"
+    }, 
+    "description": "HomeStar / IOTDB Bridge for LG SmartTV", 
+    "homepage": "https://homestar.io", 
+    "homestar": {}, 
+    "license": "Apache-2.0", 
+    "main": "index.js", 
+    "name": "homestar-lg-smart-tv", 
+    "private": false, 
+    "repository": {
+        "type": "git", 
+        "url": "https://github.com/dpjanes/homestar-lg-smart-tv"
+    }, 
+    "version": "0.0.1"
+}

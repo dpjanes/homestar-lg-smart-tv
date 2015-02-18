@@ -1,13 +1,16 @@
 /*
- *  Use a Model to manipulate semantically
+ *  How to use this module stand-alone
  */
 
-var homestar = require("homestar");
-var _ = homestar._;
+try {
+    var model = require('homestar-wemo')
+} catch (x) {
+    var model = require('../index')
+}
 
-var ModelBinding = require('../LGSmartTV');
+var _ = model.homestar._;
 
-wrapper = _.bridge_wrapper(ModelBinding.binding);
+wrapper = model.wrap("LGSmartTV");
 wrapper.on('model', function(model) {
     model.on_change(function(model) {
         console.log("+ state\n ", model.state());
@@ -17,6 +20,7 @@ wrapper.on('model', function(model) {
     });
     model.set('mute', false);
     model.set('volume', 35);
+    model.set('band', "hdmi1");
     
     console.log("+ discovered\n ", _.ld.compact(model.meta().state()), "\n ", model.thing_id());
 })

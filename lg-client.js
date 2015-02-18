@@ -26,7 +26,6 @@ var logger = bunyan.createLogger({
     module: 'lg-client',
 });
 
-
 var LGClient = function () {
     events.EventEmitter.call(this);
 
