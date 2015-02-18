@@ -3,7 +3,7 @@
  */
 
 try {
-    var model = require('homestar-wemo')
+    var model = require('homestar-lg-smart-tv')
 } catch (x) {
     var model = require('../index')
 }
