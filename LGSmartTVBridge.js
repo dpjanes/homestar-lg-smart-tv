@@ -255,8 +255,8 @@ LGSmartTVBridge.prototype.pull = function() {
                 return;
             }
 
-            if (d.channelNumber !== self.stated['channel-value']) {
-                self.stated['channel-value'] = d.channelNumber;
+            if (d.channelNumber !== self.stated['channel']) {
+                self.stated['channel'] = d.channelNumber;
                 self.pulled(self.stated);
             }
         });
@@ -274,8 +274,8 @@ LGSmartTVBridge.prototype.pull = function() {
                 return;
             }
 
-            if (d.mute !== self.stated['mute-value']) {
-                self.stated['mute-value'] = d.mute;
+            if (d.mute !== self.stated['mute']) {
+                self.stated['mute'] = d.mute;
                 self.pulled(self.stated);
             }
         });
@@ -293,8 +293,8 @@ LGSmartTVBridge.prototype.pull = function() {
                 return;
             }
 
-            if (d.volume !== self.stated['volume-value']) {
-                self.stated['volume-value'] = d.volume;
+            if (d.volume !== self.stated['volume']) {
+                self.stated['volume'] = d.volume;
                 self.pulled(self.stated);
             }
         });
@@ -312,8 +312,8 @@ LGSmartTVBridge.prototype.pull = function() {
                 return;
             }
 
-            if (d.appId !== self.stated['band-value']) {
-                self.stated['band-value'] = d.appId;
+            if (d.appId !== self.stated['band']) {
+                self.stated['band'] = d.appId;
                 self.pulled(self.stated);
             }
         });
