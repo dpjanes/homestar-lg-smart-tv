@@ -12,10 +12,10 @@ var _ = model.homestar._;
 
 wrapper = model.wrap("LGSmartTV");
 wrapper.on('model', function(model) {
-    model.on_change(function(model) {
+    model.on("state", function(model) {
         console.log("+ state\n ", model.state());
     });
-    model.on_meta(function(model) {
+    model.on("meta", function(model) {
         console.log("+ meta\n ", _.ld.compact(model.meta().state()));
     });
     model.set('mute', false);
