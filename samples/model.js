@@ -11,7 +11,7 @@ try {
 var _ = model.homestar._;
 
 wrapper = model.wrap("LGSmartTV");
-wrapper.on('model', function(model) {
+wrapper.on('thing', function(model) {
     model.on("state", function(model) {
         console.log("+ state\n ", model.state());
     });
