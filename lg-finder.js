@@ -26,7 +26,7 @@ var logger = bunyan.createLogger({
     module: 'lg-finder',
 });
 
-function LGFinder() {
+var LGFinder = function () {
     events.EventEmitter.call(this);
     this.devices = {};
     this.startDiscovery();
@@ -54,7 +54,7 @@ LGFinder.prototype.startDiscovery = function () {
 
             if (record && --record.ttl <= 0) {
                 delete this.devices[ip];
-                this.emit("lost", reocrd.address);
+                this.emit("lost", record.address);
             }
         }, this);
     }.bind(this);
@@ -63,10 +63,12 @@ LGFinder.prototype.startDiscovery = function () {
         socket.setBroadcast(true);
         socket.addMembership('239.255.255.250');
 
+        var _send_search = function () {
+            sendSearch();
+        };
+
         for (var i = 0; i < 3; i++) {
-            setTimeout(function () {
-                sendSearch();
-            }, Math.random() * 1000);
+            setTimeout(_send_search, Math.random() * 1000);
         }
 
         this.rescanId = setInterval(function () {

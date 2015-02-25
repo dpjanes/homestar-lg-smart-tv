@@ -22,7 +22,7 @@
 
 "use strict";
 
-var iotdb = require('iotdb')
+var iotdb = require('iotdb');
 var _ = iotdb._;
 var bunyan = iotdb.bunyan;
 
@@ -37,7 +37,7 @@ var logger = bunyan.createLogger({
 /**
  *  EXEMPLAR and INSTANCE
  *  <p>
- *  No subclassing needed! The following functions are 
+ *  No subclassing needed! The following functions are
  *  injected _after_ this is created, and before .discover and .connect
  *  <ul>
  *  <li><code>discovered</code> - tell IOTDB that we're talking to a new Thing
@@ -46,7 +46,7 @@ var logger = bunyan.createLogger({
  *  <li><code>disconnnected</code> - this has been disconnected from a Thing
  *  </ul>
  */
-var LGSmartTVBridge = function(initd, native) {
+var LGSmartTVBridge = function (initd, native) {
     var self = this;
 
     self.initd = _.defaults(initd, {
@@ -67,7 +67,7 @@ var LGSmartTVBridge = function(initd, native) {
 /* --- lifecycle --- */
 
 /**
- *  EXEMPLAR. 
+ *  EXEMPLAR.
  *  Discover Hue
  *  <ul>
  *  <li>look for Things (using <code>self.bridge</code> data to initialize)
@@ -75,7 +75,7 @@ var LGSmartTVBridge = function(initd, native) {
  *  <li>create an LGSmartTVBridge(native)
  *  <li>call <code>self.discovered(bridge)</code> with it
  */
-LGSmartTVBridge.prototype.discover = function() {
+LGSmartTVBridge.prototype.discover = function () {
     var self = this;
 
     var cp = iotdb.upnp().control_point();
@@ -101,7 +101,7 @@ LGSmartTVBridge.prototype.discover = function() {
  *  INSTANCE
  *  This is called when the Bridge is no longer needed. When
  */
-LGSmartTVBridge.prototype.connect = function(connectd) {
+LGSmartTVBridge.prototype.connect = function (connectd) {
     var self = this;
     if (!self.native) {
         return;
@@ -111,13 +111,13 @@ LGSmartTVBridge.prototype.connect = function(connectd) {
     self.pull();
 };
 
-LGSmartTVBridge.prototype._setup_polling = function() {
+LGSmartTVBridge.prototype._setup_polling = function () {
     var self = this;
     if (!self.initd.poll) {
         return;
     }
 
-    var timer = setInterval(function() {
+    var timer = setInterval(function () {
         if (!self.native) {
             clearInterval(timer);
             return;
@@ -127,7 +127,7 @@ LGSmartTVBridge.prototype._setup_polling = function() {
     }, self.initd.poll * 1000);
 };
 
-LGSmartTVBridge.prototype._forget = function() {
+LGSmartTVBridge.prototype._forget = function () {
     var self = this;
     if (!self.native) {
         return;
@@ -139,13 +139,13 @@ LGSmartTVBridge.prototype._forget = function() {
 
     self.native = null;
     self.pulled();
-}
+};
 
 /**
- *  INSTANCE and EXEMPLAR (during shutdown). 
- *  This is called when the Bridge is no longer needed. 
+ *  INSTANCE and EXEMPLAR (during shutdown).
+ *  This is called when the Bridge is no longer needed.
  */
-LGSmartTVBridge.prototype.disconnect = function() {
+LGSmartTVBridge.prototype.disconnect = function () {
     var self = this;
     if (!self.native || !self.native) {
         return;
@@ -160,7 +160,7 @@ LGSmartTVBridge.prototype.disconnect = function() {
  *  INSTANCE.
  *  Send data to whatever you're taking to.
  */
-LGSmartTVBridge.prototype.push = function(pushd) {
+LGSmartTVBridge.prototype.push = function (pushd) {
     var self = this;
     if (!self.native) {
         return;
@@ -182,7 +182,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
             launch = pushd.band;
         }
 
-        self._queue("set-band", function(client) {
+        self._queue("set-band", function (client) {
             LG.launch(client, launch, function (error, d) {
                 logger.info({
                     method: "push/connect/band",
@@ -192,7 +192,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     // d: d,
                 }, "called");
 
-                if (!error && (self.stated.band !== pushd.band)) {;
+                if (!error && (self.stated.band !== pushd.band)) {
                     self.stated.band = pushd.band;
                     self.pulled(self.stated);
                 }
@@ -201,7 +201,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
     }
 
     if (pushd.channel !== undefined) {
-        self._queue("set-channel", function(client) {
+        self._queue("set-channel", function (client) {
             LG.setChannel(client, pushd.channel, function (error, d) {
                 logger.info({
                     method: "push/connect/setChannel",
@@ -210,7 +210,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     // d: d,
                 }, "called");
 
-                if (!error && (self.stated.channel !== pushd.channel)) {;
+                if (!error && (self.stated.channel !== pushd.channel)) {
                     self.stated.channel = pushd.channel;
                     self.pulled(self.stated);
                 }
@@ -219,7 +219,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
     }
 
     if (pushd.volume !== undefined) {
-        self._queue("set-volume", function(client) {
+        self._queue("set-volume", function (client) {
             LG.setVolume(client, pushd.volume, function (error, d) {
                 logger.info({
                     method: "push/connect/setVolume",
@@ -228,7 +228,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     // d: d,
                 }, "called");
 
-                if (!error && (self.stated.volume !== pushd.volume)) {;
+                if (!error && (self.stated.volume !== pushd.volume)) {
                     self.stated.volume = pushd.volume;
                     self.pulled(self.stated);
                 }
@@ -237,7 +237,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
     }
 
     if (pushd.mute !== undefined) {
-        self._queue("set-mute", function(client) {
+        self._queue("set-mute", function (client) {
             LG.setMute(client, pushd.mute, function (error, d) {
                 logger.info({
                     method: "push/connect/setMute",
@@ -246,7 +246,7 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     // d: d,
                 }, "called");
 
-                if (!error && (self.stated.mute !== pushd.mute)) {;
+                if (!error && (self.stated.mute !== pushd.mute)) {
                     self.stated.mute = pushd.mute;
                     self.pulled(self.stated);
                 }
@@ -260,13 +260,13 @@ LGSmartTVBridge.prototype.push = function(pushd) {
  *  Pull data from whatever we're talking to. You don't
  *  have to implement this if it doesn't make sense
  */
-LGSmartTVBridge.prototype.pull = function() {
+LGSmartTVBridge.prototype.pull = function () {
     var self = this;
     if (!self.native) {
         return;
     }
 
-    self._queue("get-channel", function(client) {
+    self._queue("get-channel", function (client) {
         LG.getChannel(client, function (error, d) {
             logger.debug({
                 method: "push/connect/getChannel",
@@ -285,7 +285,7 @@ LGSmartTVBridge.prototype.pull = function() {
         });
     });
 
-    self._queue("get-mute", function(client) {
+    self._queue("get-mute", function (client) {
         LG.getMute(client, function (error, d) {
             logger.debug({
                 method: "push/connect/getMute",
@@ -304,7 +304,7 @@ LGSmartTVBridge.prototype.pull = function() {
         });
     });
 
-    self._queue("get-volume", function(client) {
+    self._queue("get-volume", function (client) {
         LG.getVolume(client, function (error, d) {
             logger.debug({
                 method: "push/connect/getVolume",
@@ -323,7 +323,7 @@ LGSmartTVBridge.prototype.pull = function() {
         });
     });
 
-    self._queue("get-band", function(client) {
+    self._queue("get-band", function (client) {
         LG.getForegroundAppInfo(client, function (error, d) {
             logger.debug({
                 method: "push/connect/getForegroundAppInfo",
@@ -361,7 +361,7 @@ LGSmartTVBridge.prototype.pull = function() {
  *  <li><code>schema:manufacturer</code>
  *  <li><code>schema:model</code>
  */
-LGSmartTVBridge.prototype.meta = function() {
+LGSmartTVBridge.prototype.meta = function () {
     var self = this;
     if (!self.native) {
         return;
@@ -377,43 +377,42 @@ LGSmartTVBridge.prototype.meta = function() {
 
 /**
  *  INSTANCE.
- *  Return True if this is reachable. You 
+ *  Return True if this is reachable. You
  *  do not need to worry about connect / disconnect /
  *  shutdown states, they will be always checked first.
  */
-LGSmartTVBridge.prototype.reachable = function() {
+LGSmartTVBridge.prototype.reachable = function () {
     return this.native !== null;
 };
 
 /**
  *  INSTANCE.
  *  Configure an express web page to configure this Bridge.
- *  Return the name of the Bridge, which may be 
+ *  Return the name of the Bridge, which may be
  *  listed and displayed to the user.
  *
  *  XXX - this may actually need configuring
  */
-LGSmartTVBridge.prototype.configure = function(app) {
-};
+LGSmartTVBridge.prototype.configure = function (app) {};
 
 /* --- injected: THIS CODE WILL BE REMOVED AT RUNTIME, DO NOT MODIFY  --- */
-LGSmartTVBridge.prototype.discovered = function(bridge) {
+LGSmartTVBridge.prototype.discovered = function (bridge) {
     throw new Error("LGSmartTVBridge.discovered not implemented");
 };
 
-LGSmartTVBridge.prototype.pulled = function(pulld) {
+LGSmartTVBridge.prototype.pulled = function (pulld) {
     throw new Error("LGSmartTVBridge.pulled not implemented");
 };
 
 /* -- internals -- */
-LGSmartTVBridge.prototype._queue = function(qid, f) {
+LGSmartTVBridge.prototype._queue = function (qid, f) {
     var self = this;
 
     self.queued[qid] = f;
     self._run();
 };
 
-LGSmartTVBridge.prototype._run = function() {
+LGSmartTVBridge.prototype._run = function () {
     var self = this;
 
     // anything queued?
@@ -431,7 +430,7 @@ LGSmartTVBridge.prototype._run = function() {
 
     // connect if not, otherwise run
     if (!self.client) {
-        var _on_close = function() {
+        var _on_close = function () {
             if (!self.client) {
                 return;
             }

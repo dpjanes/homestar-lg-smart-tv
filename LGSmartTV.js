@@ -6,7 +6,7 @@
  *  2014-12-09
  */
 
-var iotdb = require("iotdb")
+var iotdb = require("iotdb");
 
 exports.Model = iotdb.make_model('LGSmartTV')
     .facet(":media.tv")
@@ -16,7 +16,7 @@ exports.Model = iotdb.make_model('LGSmartTV')
     .io("channel", iotdb.integer.channel)
     .io("volume", iotdb.percent.volume)
     .io("mute", iotdb.boolean.mute)
-    .make()
+    .make();
 
 exports.binding = {
     bridge: require('./LGSmartTVBridge').Bridge,

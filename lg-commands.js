@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+"use strict";
+
 var iotdb = require('iotdb');
 var bunyan = iotdb.bunyan;
 
@@ -29,7 +31,7 @@ var logger = bunyan.createLogger({
 var LGFinder = require('./lg-finder').LGFinder;
 var LGClient = require('./lg-client').LGClient;
 
-_lg_doit = function (client, request_id, paramd, callback) {
+var _lg_doit = function (client, request_id, paramd, callback) {
     client.sendRequest(request_id, paramd, function (error, response) {
         logger.info({
             method: "_lg_doit",
@@ -40,21 +42,21 @@ _lg_doit = function (client, request_id, paramd, callback) {
 
         callback(error, response);
     });
-}
+};
 
 /**
  *  More or less corresponding to Bands
  */
 exports.listLaunchPoints = function (client, callback) {
     _lg_doit(client, 'ssap://com.webos.applicationManager/listLaunchPoints', {}, callback);
-}
+};
 
 /**
  *  More or less corresponding to Bands (sigh)
  */
 exports.getForegroundAppInfo = function (client, callback) {
     _lg_doit(client, 'ssap://com.webos.applicationManager/getForegroundAppInfo', {}, callback);
-}
+};
 
 
 /**
@@ -62,7 +64,7 @@ exports.getForegroundAppInfo = function (client, callback) {
  */
 exports.getVolume = function (client, callback) {
     _lg_doit(client, 'ssap://audio/getVolume', {}, callback);
-}
+};
 
 /**
  *  Set the TV volume
@@ -71,14 +73,14 @@ exports.setVolume = function (client, volume, callback) {
     _lg_doit(client, 'ssap://audio/setVolume', {
         volume: volume
     }, callback);
-}
+};
 
 /**
  *  Get the TV mute status
  */
 exports.getMute = function (client, callback) {
     _lg_doit(client, 'ssap://audio/getMute', {}, callback);
-}
+};
 
 /**
  *  Set the TV mute
@@ -87,7 +89,7 @@ exports.setMute = function (client, mute, callback) {
     _lg_doit(client, 'ssap://audio/setMute', {
         mute: mute
     }, callback);
-}
+};
 
 /**
  *  Get the TV channel
@@ -111,7 +113,7 @@ exports.switchInput = function (client, input, callback) {
     _lg_doit(client, 'ssap://tv/switchInput', {
         inputId: input
     }, callback);
-}
+};
 
 /**
  *  More or less the band of the TV. This is the best
@@ -141,4 +143,4 @@ exports.launch = function (client, id, callback) {
     _lg_doit(client, 'ssap://system.launcher/launch', {
         id: id
     }, callback);
-}
+};
