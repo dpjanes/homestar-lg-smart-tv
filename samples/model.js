@@ -8,7 +8,7 @@ try {
     var model = require('../index')
 }
 
-var _ = model.homestar._;
+var _ = model.iotdb._;
 
 wrapper = model.wrap("LGSmartTV");
 wrapper.on('thing', function(model) {

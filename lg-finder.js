@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-var homestar = require('homestar');
-var bunyan = homestar.bunyan;
+var iotdb = require('iotdb');
+var bunyan = iotdb.bunyan;
 
 var events = require('events');
 var WebSocket = require('ws');

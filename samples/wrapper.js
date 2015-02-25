@@ -3,8 +3,8 @@
  *  Use a "bridge_wrapper", which handles all injections
  */
 
-var homestar = require("homestar");
-var _ = homestar._;
+var iotdb = require("iotdb");
+var _ = iotdb._;
 
 var ModelBinding = require('../LGSmartTV');
 

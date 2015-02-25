@@ -22,9 +22,9 @@
 
 "use strict";
 
-var homestar = require('homestar')
-var _ = homestar._;
-var bunyan = homestar.bunyan;
+var iotdb = require('iotdb')
+var _ = iotdb._;
+var bunyan = iotdb.bunyan;
 
 var LGClient = require('./lg-client').LGClient;
 var LG = require('./lg-commands');
@@ -78,7 +78,7 @@ var LGSmartTVBridge = function(initd, native) {
 LGSmartTVBridge.prototype.discover = function() {
     var self = this;
 
-    var cp = homestar.upnp.control_point();
+    var cp = iotdb.upnp().control_point();
 
     cp.on("device", function (native) {
         if (native.deviceType !== 'urn:schemas-upnp-org:device:Basic:1') {
@@ -167,7 +167,6 @@ LGSmartTVBridge.prototype.push = function(pushd) {
     }
 
     if (pushd.band !== undefined) {
-        // XXX - THIS NEEDS TO BE SEMANTIC
         var launch = pushd.band.toLowerCase();
         if (launch === "hdmi1") {
             launch = "com.webos.app.hdmi1";
@@ -190,7 +189,13 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     unique_id: self.unique_id,
                     launch: launch,
                     band: pushd.band,
+                    // d: d,
                 }, "called");
+
+                if (!error && (self.stated.band !== pushd.band)) {;
+                    self.stated.band = pushd.band;
+                    self.pulled(self.stated);
+                }
             });
         });
     }
@@ -202,7 +207,13 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     method: "push/connect/setChannel",
                     unique_id: self.unique_id,
                     channel: pushd.channel,
+                    // d: d,
                 }, "called");
+
+                if (!error && (self.stated.channel !== pushd.channel)) {;
+                    self.stated.channel = pushd.channel;
+                    self.pulled(self.stated);
+                }
             });
         });
     }
@@ -214,7 +225,13 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     method: "push/connect/setVolume",
                     unique_id: self.unique_id,
                     volume: pushd.volume,
+                    // d: d,
                 }, "called");
+
+                if (!error && (self.stated.volume !== pushd.volume)) {;
+                    self.stated.volume = pushd.volume;
+                    self.pulled(self.stated);
+                }
             });
         });
     }
@@ -226,7 +243,13 @@ LGSmartTVBridge.prototype.push = function(pushd) {
                     method: "push/connect/setMute",
                     unique_id: self.unique_id,
                     mute: pushd.mute,
+                    // d: d,
                 }, "called");
+
+                if (!error && (self.stated.mute !== pushd.mute)) {;
+                    self.stated.mute = pushd.mute;
+                    self.pulled(self.stated);
+                }
             });
         });
     }
