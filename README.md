@@ -1,10 +1,13 @@
 # homestar-lg-smart-tv
 
 Connect and control LG SmartTV with HomeStar and IOTDB. 
-Note that we can't turn these on and off.
+
+Note that we can't turn these _on_ because when the
+TV is off it's not on the Internet.
 
 See <a href="samples/">the samples</a> for details how to add to your project,
-particularly <code>model.js</code>.
+particularly <code>model.js</code> for use standalone
+and <code>iotdb.js</code> for use inside IOTDB.
 
 ## LGSmartTVModel
 
@@ -12,28 +15,11 @@ Semantic.
 
 ### Attributes
 
-* <code>iot-attribute:volume</code>
-* <code>iot-attribute:band</code>
-* <code>iot-attribute:mute</code>
-* <code>iot-attribute:channel</code>
+* <code>volume</code>: integer from 0 to 100 (<code>iot-attribute:volume</code>)
+* <code>band</code>: string, see below (<code>iot-attribute:band</code>)
+* <code>mute</code>: true or false (<code>iot-attribute:mute</code>)
+* <code>channel</code>: a string, like <code>3-0</code> (<code>iot-attribute:channel</code>)
 
-## LGSmartTVBridge
-
-Low-level.
-
-#### Push / controls
-
-* <code>volume</code>: integer from 0 to 100
-* <code>band</code>: string, see below
-* <code>mute</code>: true or false
-* <code>channel</code>: a string, like 3-0
-
-#### Pull / readings
-
-* <code>volume-value</code>: integer from 0 to 100
-* <code>band-value</code>: string, see below
-* <code>mute-value</code>: true or false
-* <code>channel-value</code>: a string, like 3-0
 
 ### LG TV Bands
 
