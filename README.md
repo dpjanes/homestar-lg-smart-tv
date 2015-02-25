@@ -9,6 +9,19 @@ See <a href="samples/">the samples</a> for details how to add to your project,
 particularly <code>model.js</code> for use standalone
 and <code>iotdb.js</code> for use inside IOTDB.
 
+# Quick Start
+
+Set the channel to 3
+
+	$ npm install -g homestar
+	$ npm install iotdb
+	$ homestar install homestar-lg-smart-tv
+	$ node
+	>>> iotdb = require('iotdb')
+	>>> iot = iotdb.iot()
+	>>> things = iot.connect("LGSmartTV")
+	>>> things.set(":channel", 3)
+
 ## LGSmartTVModel
 
 Semantic.
