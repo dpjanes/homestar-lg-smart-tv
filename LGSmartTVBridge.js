@@ -49,12 +49,15 @@ var logger = bunyan.createLogger({
 var LGSmartTVBridge = function (initd, native) {
     var self = this;
 
-    self.initd = _.defaults(initd, {
-        number: 0,
-        poll: 30,
-        retry: 15,
-        upnpn: true,
-    });
+    self.initd = _.defaults(initd,
+        iotdb.keystore().get("bridges/LGSmartTVBridge/initd"),
+        {
+            number: 0,
+            poll: 30,
+            retry: 15,
+            upnpn: true,
+        }
+    );
     self.native = native;
     self.stated = {};
 
@@ -78,7 +81,7 @@ var LGSmartTVBridge = function (initd, native) {
 LGSmartTVBridge.prototype.discover = function () {
     var self = this;
 
-    var cp = iotdb.upnp().control_point();
+    var cp = iotdb.module("iotdb-upnp").control_point();
 
     cp.on("device", function (native) {
         if (native.deviceType !== 'urn:schemas-upnp-org:device:Basic:1') {

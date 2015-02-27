@@ -30,7 +30,7 @@ echo "=================="
     update-package --increment-version --package "$PACKAGE" --homestar || exit 1
 
     tar cf - \
-        README.md LICENSE package.json \
+        README.md LICENSE homestar.json package.json \
         *.js \
         |
     ( cd "${NPM_DST}" && tar xvf - )

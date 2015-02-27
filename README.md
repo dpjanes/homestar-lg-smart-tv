@@ -13,7 +13,7 @@ and <code>iotdb.js</code> for use inside IOTDB.
 
 Set the channel to 3
 
-	$ npm install -g homestar
+	$ npm install -g homestar ## with 'sudo' if error
 	$ npm install iotdb
 	$ homestar install homestar-lg-smart-tv
 	$ node
@@ -22,17 +22,12 @@ Set the channel to 3
 	>>> things = iot.connect("LGSmartTV")
 	>>> things.set(":channel", 3)
 
-## LGSmartTVModel
-
-Semantic.
-
-### Attributes
+# LGSmartTV
 
 * <code>volume</code>: integer from 0 to 100 (<code>iot-attribute:volume</code>)
 * <code>band</code>: string, see below (<code>iot-attribute:band</code>)
 * <code>mute</code>: true or false (<code>iot-attribute:mute</code>)
 * <code>channel</code>: a string, like <code>3-0</code> (<code>iot-attribute:channel</code>)
-
 
 ### LG TV Bands
 

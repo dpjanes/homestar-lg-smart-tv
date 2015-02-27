@@ -22,6 +22,8 @@
 
 "use strict";
 
+exports.iotdb_module = true;
+
 exports.Bridge = require('./LGSmartTV');
 exports.bindings = [
     require('./LGSmartTV').binding,

@@ -5,6 +5,7 @@
     }, 
     "dependencies": {
         "iotdb": ">=0.4.16", 
+        "iotdb-upnp": "", 
         "ws": "~0.7.1"
     }, 
     "description": "HomeStar / IOTDB Bridge for LG SmartTV", 
