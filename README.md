@@ -14,7 +14,7 @@ and <code>iotdb.js</code> for use inside IOTDB.
 Set the channel to 3
 
 	$ npm install -g homestar ## with 'sudo' if error
-	$ npm install iotdb
+	$ homestar setup
 	$ homestar install homestar-lg-smart-tv
 	$ node
 	>>> iotdb = require('iotdb')
