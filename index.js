@@ -24,7 +24,7 @@
 
 exports.Bridge = require('./LGSmartTV');
 exports.bindings = [
-    require('./LGSmartTV').binding,
+    require('./models/LGSmartTV').binding,
 ];
 
 exports.iotdb = require("iotdb");

@@ -19,6 +19,6 @@ exports.Model = iotdb.make_model('LGSmartTV')
     .make();
 
 exports.binding = {
-    bridge: require('./LGSmartTVBridge').Bridge,
+    bridge: require('../LGSmartTVBridge').Bridge,
     model: exports.Model,
 };
