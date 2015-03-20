@@ -14,7 +14,7 @@ exports.Model = iotdb.make_model('LGSmartTV')
     .name("LG Smart TV (WebOs)")
     .io("band", iotdb.string.band)
     .io("channel", iotdb.integer.channel)
-    .io("volume", iotdb.percent.volume)
+    .io("volume", iotdb.number.percent.volume)
     .io("mute", iotdb.boolean.mute)
     .make();
 

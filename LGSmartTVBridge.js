@@ -359,7 +359,7 @@ LGSmartTVBridge.prototype.pull = function () {
  *  <ul>
  *  <li><code>iot:thing</code> required - a unique ID
  *  <li><code>iot:device</code> suggested if linking multiple things together
- *  <li><code>iot:name</code>
+ *  <li><code>schema:name</code>
  *  <li><code>iot:number</code>
  *  <li><code>schema:manufacturer</code>
  *  <li><code>schema:model</code>
@@ -372,7 +372,7 @@ LGSmartTVBridge.prototype.meta = function () {
 
     return {
         "iot:thing": _.id.thing_urn.unique("LGSmartTV", self.native.uuid),
-        "iot:name": self.native.friendLy || "LGSmartTV",
+        "schema:name": self.native.friendLy || "LGSmartTV",
         "schema:manufacturer": self.native.manufacturerUrl,
         "schema:mpn": self.native.modelNumber,
     };
