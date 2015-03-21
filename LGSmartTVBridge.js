@@ -50,8 +50,7 @@ var LGSmartTVBridge = function (initd, native) {
     var self = this;
 
     self.initd = _.defaults(initd,
-        iotdb.keystore().get("bridges/LGSmartTVBridge/initd"),
-        {
+        iotdb.keystore().get("bridges/LGSmartTVBridge/initd"), {
             number: 0,
             poll: 30,
             retry: 15,
