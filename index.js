@@ -22,7 +22,7 @@
 
 "use strict";
 
-exports.Bridge = require('./LGSmartTVBridge');
+exports.Bridge = require('./LGSmartTVBridge').Bridge;
 exports.bindings = [
     require('./models/LGSmartTV').binding,
 ];
