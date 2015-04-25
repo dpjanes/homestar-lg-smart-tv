@@ -3,25 +3,27 @@
  *  Use a "bridge_wrapper", which handles all injections
  */
 
+"use strict";
+
 var iotdb = require("iotdb");
 var _ = iotdb._;
 
-var ModelBinding = require('../LGSmartTV');
+var ModelBinding = require('../models/LGSmartTV');
 
-wrapper = _.bridge_wrapper(ModelBinding.binding);
-wrapper.on('bridge', function(bridge) {
+var wrapper = _.bridge_wrapper(ModelBinding.binding);
+wrapper.on('bridge', function (bridge) {
     console.log("+ discovered\n ", _.ld.compact(bridge.meta()));
     bridge.push({
         volume: 19,
         band: "netflix",
     });
-})
-wrapper.on('state', function(bridge, state) {
+});
+wrapper.on('state', function (bridge, state) {
     console.log("+ state", state);
-})
-wrapper.on('meta', function(bridge) {
+});
+wrapper.on('meta', function (bridge) {
     console.log("+ meta", _.ld.compact(bridge.meta()));
-})
-wrapper.on('disconnected', function(bridge) {
+});
+wrapper.on('disconnected', function (bridge) {
     console.log("+ disconnected", _.ld.compact(bridge.meta()));
-})
+});

@@ -4,11 +4,18 @@
  *  Note: to work, this package must have been installed by 'homestar install' 
  */
 
-var iotdb = require('iotdb')
+"use strict";
+
+var iotdb = require('iotdb');
 var iot = iotdb.iot();
 
 var things = iot.connect('LGSmartTV');
-things.update({
+/*
+things.set(":band", "iotdb-attribute:band.tv");
+ */
+things.update("ostate", {
     volume: 35,
-    band: "TV",
+    band: "iot-attribute:band.tv",
 });
+/*
+ */

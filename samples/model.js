@@ -2,25 +2,27 @@
  *  How to use this module stand-alone
  */
 
+"use strict";
+
 try {
-    var model = require('homestar-lg-smart-tv')
+    var model = require('homestar-lg-smart-tv');
 } catch (x) {
-    var model = require('../index')
+    var model = require('../index');
 }
 
 var _ = model.iotdb._;
 
-wrapper = model.wrap("LGSmartTV");
-wrapper.on('thing', function(model) {
-    model.on("state", function(model) {
-        console.log("+ state\n ", model.state());
+var wrapper = model.wrap("LGSmartTV");
+wrapper.on('thing', function (model) {
+    model.on("state", function (model) {
+        console.log("+ state\n ", model.thing_id(), model.state("istate"));
     });
-    model.on("meta", function(model) {
-        console.log("+ meta\n ", _.ld.compact(model.meta().state()));
+    model.on("meta", function (model) {
+        console.log("+ state\n ", model.thing_id(), model.state("meta"));
     });
     model.set('mute', false);
     model.set('volume', 35);
     model.set('band', "hdmi1");
-    
-    console.log("+ discovered\n ", _.ld.compact(model.meta().state()), "\n ", model.thing_id());
-})
+
+    console.log("+ discovered\n ", model.thing_id(), model.state("meta"));
+});

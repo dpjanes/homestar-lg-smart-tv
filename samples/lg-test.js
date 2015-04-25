@@ -1,8 +1,8 @@
 /*
- *  NOTE: the best way to use this is in "model.js"
+ *  NOTE: the best way to use this is in "iotdb.js"
  */
 
-"use struct";
+"use strict";
 
 var LGClient = require('./lg-client').LGClient;
 var LG = require('./lg-commands');

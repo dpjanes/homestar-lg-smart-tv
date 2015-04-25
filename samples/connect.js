@@ -3,19 +3,21 @@
  *  Connect to a Denon AVR at a named host
  */
 
+"use strict";
+
 var LGSmartTVBridge = require('../LGSmartTVBridge').Bridge;
 
-var denon = new LGSmartTVBridge();
-denon.discovered = function(bridge) {
+var tv = new LGSmartTVBridge();
+tv.discovered = function (bridge) {
     console.log("+ got one", bridge.meta());
-    bridge.pulled = function(state) {
+    bridge.pulled = function (state) {
         console.log("+ state-change", state);
     };
-    bridge.connect();
+    bridge.connect({});
     bridge.push({
         volume: 30,
         // band: "netflix",
         band: "hdmi1",
     });
 };
-denon.discover();
+tv.discover();
