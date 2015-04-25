@@ -161,6 +161,8 @@ LGSmartTVBridge.prototype.push = function (pushd) {
         return;
     }
 
+    self._validate_push(pushd);
+
     if (pushd.band !== undefined) {
         var launch = pushd.band.toLowerCase();
         if (launch === "hdmi1") {
