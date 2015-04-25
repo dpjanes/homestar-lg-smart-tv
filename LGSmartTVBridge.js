@@ -369,15 +369,6 @@ LGSmartTVBridge.prototype.reachable = function () {
  */
 LGSmartTVBridge.prototype.configure = function (app) {};
 
-/* --- injected: THIS CODE WILL BE REMOVED AT RUNTIME, DO NOT MODIFY  --- */
-LGSmartTVBridge.prototype.discovered = function (bridge) {
-    throw new Error("LGSmartTVBridge.discovered not implemented");
-};
-
-LGSmartTVBridge.prototype.pulled = function (pulld) {
-    throw new Error("LGSmartTVBridge.pulled not implemented");
-};
-
 /* -- internals -- */
 LGSmartTVBridge.prototype._queue = function (qid, f) {
     var self = this;
