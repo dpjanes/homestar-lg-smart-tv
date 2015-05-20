@@ -4,7 +4,7 @@
         "url": "https://github.com/dpjanes/homestar-lg-smart-tv/issues"
     }, 
     "dependencies": {
-        "ws": "~0.7.1"
+        "ws": "~0.7.2"
     }, 
     "description": "HomeStar / IOTDB Bridge for LG SmartTV", 
     "devDependencies": {
@@ -24,8 +24,8 @@
     "main": "index.js", 
     "name": "homestar-lg-smart-tv", 
     "peerDependencies": {
-        "iotdb": ">=0.6.3", 
-        "iotdb-upnp": ">=0.0.8"
+        "iotdb": ">=0.6.9", 
+        "iotdb-upnp": ">=0.0.9"
     }, 
     "private": false, 
     "repository": {
@@ -35,5 +35,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "0.0.6"
+    "version": "0.0.7"
 }
