@@ -91,7 +91,7 @@ LGClient.prototype.connect = function (ip, cb) {
             type: 'register',
             payload: {
                 manifest: this.manifest,
-                "client-key": "be6c232c39b4afb816d7b952b0581bfc"
+                "client-key": "5e8c8ea4f9ccc45f996ba8cf05cd9cb4"
             }
         });
     }.bind(this));
@@ -118,6 +118,7 @@ LGClient.prototype.connect = function (ip, cb) {
                 }
             }
         } else if (message.type === "registered") {
+            console.log("HERE:XXX", message);
             this.emit('connected');
             this.ready = true;
 
