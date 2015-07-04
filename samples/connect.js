@@ -18,6 +18,6 @@ tv.discovered = function (bridge) {
         volume: 30,
         // band: "netflix",
         band: "hdmi1",
-    }, function() {});
+    }, function () {});
 };
 tv.discover();

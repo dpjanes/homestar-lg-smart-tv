@@ -16,7 +16,7 @@ wrapper.on('bridge', function (bridge) {
     bridge.push({
         volume: 19,
         band: "netflix",
-    }, function() {});
+    }, function () {});
 });
 wrapper.on('state', function (bridge, state) {
     console.log("+ state", state);

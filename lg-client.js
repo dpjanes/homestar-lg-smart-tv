@@ -26,8 +26,13 @@ var logger = bunyan.createLogger({
     module: 'lg-client',
 });
 
-var LGClient = function () {
+var LGClient = function (initd) {
     events.EventEmitter.call(this);
+
+    this.client_key = null;
+    if (initd && initd.client_key) {
+        this.client_key = initd.client_key;
+    }
 
     this.ready = false;
     this.requestId = 1;
@@ -61,11 +66,8 @@ events.EventEmitter.call(LGClient);
 util.inherits(LGClient, events.EventEmitter);
 
 LGClient.prototype.connect = function (ip, cb) {
-    // console.log("HERE:A.1", ip);
-    // XXX - probably does nothing useful?
     if (cb) {
         var handler = function () {
-            // console.log("HERE:AAA ---------", arguments);
             this.removeListener('connected', handler);
             this.removeListener('error', handler);
             this.removeListener('close', handler);
@@ -79,10 +81,8 @@ LGClient.prototype.connect = function (ip, cb) {
     this.ws = new WebSocket("ws://" + ip + ":3000", {
         origin: "null"
     });
-    // console.log("HERE:A.2", ip);
 
     this.ws.on('open', function () {
-        // console.log("HERE:B.1:open");
         logger.info({
             method: "connect/on(open)",
         }, "called");
@@ -91,13 +91,13 @@ LGClient.prototype.connect = function (ip, cb) {
             type: 'register',
             payload: {
                 manifest: this.manifest,
-                "client-key": "5e8c8ea4f9ccc45f996ba8cf05cd9cb4"
+                "client-key": this.client_key,
+                // "client-key": "5e8c8ea4f9ccc45f996ba8cf05cd9cb4"
             }
         });
     }.bind(this));
 
     this.ws.on('message', function (data) {
-        // console.log("HERE:B.2:message");
         logger.info({
             method: "connect/on(message)",
             data: data
@@ -118,7 +118,7 @@ LGClient.prototype.connect = function (ip, cb) {
                 }
             }
         } else if (message.type === "registered") {
-            console.log("HERE:XXX", message);
+            this.emit('registered', message.payload['client-key']);
             this.emit('connected');
             this.ready = true;
 
@@ -130,13 +130,11 @@ LGClient.prototype.connect = function (ip, cb) {
     }.bind(this));
 
     this.ws.on('error', function (err) {
-        // console.log("HERE:B.1:error", err);
         this.ready = false;
         this.emit('error', err);
     }.bind(this));
 
     this.ws.on('close', function () {
-        // console.log("HERE:B.1:close");
         this.ready = false;
         this.emit('close', 'connection closed');
     }.bind(this));

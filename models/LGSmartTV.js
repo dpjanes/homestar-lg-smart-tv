@@ -25,13 +25,13 @@ exports.Model = iotdb.make_model('LGSmartTV')
             "iot-attribute:band.camera",
             "iot-attribute:band.info.guide",
             "iot-attribute:band.info.notifications",
-            "iot-attribute:band.vendor.anyplace-tv",
-            "iot-attribute:band.vendor.cinemanow",
-            "iot-attribute:band.vendor.crackle",
-            "iot-attribute:band.vendor.netflix",
-            "iot-attribute:band.vendor.youtube",
-            "iot-attribute:band.vendor.miracast",
-            "iot-attribute:band.vendor.smartshare",
+            "iot-attribute:band.service.anyplace-tv",
+            "iot-attribute:band.service.cinemanow",
+            "iot-attribute:band.service.crackle",
+            "iot-attribute:band.service.netflix",
+            "iot-attribute:band.service.youtube",
+            "iot-attribute:band.service.miracast",
+            "iot-attribute:band.service.smartshare",
         ]))
     )
     .io("channel", iotdb.integer.channel)
@@ -44,21 +44,21 @@ exports.binding = {
     model: exports.Model,
     mapping: {
         band: {
-            "iot-attribute:band.vendor.anyplace-tv": "anyplace.tv",
-            "iot-attribute:band.vendor.cinemanow": "cinemanow",
+            "iot-attribute:band.service.anyplace-tv": "anyplace.tv",
+            "iot-attribute:band.service.cinemanow": "cinemanow",
             "iot-attribute:band.browser": "com.webos.app.browser",
             "iot-attribute:band.camera": "com.webos.app.camera",
             "iot-attribute:band.hdmi": "com.webos.app.hdmi1",
             "iot-attribute:band.hdmi#1": "com.webos.app.hdmi1",
             "iot-attribute:band.hdmi#2": "com.webos.app.hdmi2",
             "iot-attribute:band.tv": "com.webos.app.livetv",
-            "iot-attribute:band.vendor.miracast": "com.webos.app.miracast",
+            "iot-attribute:band.service.miracast": "com.webos.app.miracast",
             "iot-attribute:band.info.notifications": "com.webos.app.notificationcenter",
-            "iot-attribute:band.vendor.smartshare": "com.webos.app.smartshare",
+            "iot-attribute:band.service.smartshare": "com.webos.app.smartshare",
             "iot-attribute:band.info.guide": "com.webos.app.tvuserguide",
-            "iot-attribute:band.vendor.crackle": "crackle",
-            "iot-attribute:band.vendor.netflix": "netflix",
-            "iot-attribute:band.vendor.youtube": "youtube.leanback.v4",
+            "iot-attribute:band.service.crackle": "crackle",
+            "iot-attribute:band.service.netflix": "netflix",
+            "iot-attribute:band.service.youtube": "youtube.leanback.v4",
         }
     }
 };
