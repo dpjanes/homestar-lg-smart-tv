@@ -450,9 +450,7 @@ LGSmartTVBridge.prototype._run = function () {
         self.client.on('error', _on_close);
         self.client.on('close', _on_close);
         self.client.on('registered', function (client_key) {
-            console.log("HERE:XXX.1");
             if (client_key !== self.initd.client_key) {
-                console.log("HERE:XXX.2", client_key);
                 iotdb.keystore().save("bridges/LGSmartTVBridge/initd/client_key", client_key, {
                     mkdirs: true,
                 });
