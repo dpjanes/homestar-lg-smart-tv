@@ -388,7 +388,7 @@ LGSmartTVBridge.prototype.meta = function () {
     }
 
     return {
-        "iot:thing": _.id.thing_urn.unique("LGSmartTV", self.native.uuid),
+        "iot:thing-id": _.id.thing_urn.unique("LGSmartTV", self.native.uuid),
         "schema:name": self.native.friendLy || "LGSmartTV",
         "schema:manufacturer": self.native.manufacturerUrl,
         "schema:mpn": self.native.modelNumber,
