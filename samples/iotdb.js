@@ -15,7 +15,7 @@ things.set(":band", "iotdb-attribute:band.tv");
  */
 things.update("ostate", {
     volume: 35,
-    band: "iot-attribute:band.tv",
+    band: "iot-purpose:band.tv",
 });
 /*
  */
