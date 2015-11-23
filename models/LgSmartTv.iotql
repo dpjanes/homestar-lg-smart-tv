@@ -1,0 +1,40 @@
+CREATE MODEL LgSmartTv WITH
+    schema:name = "LG Smart TV (WebOs)",
+    iot:facet = iot-facet:media,
+    iot:facet = iot-facet:media.tv
+ATTRIBUTE band WITH
+    schema:name = "band",
+    iot:purpose = iot-purpose:band,
+    iot:type = iot:type.string,
+    iot:enumeration = iot-purpose:band.tv,
+    iot:enumeration = iot-purpose:band.hdmi,
+    iot:enumeration = iot-purpose:band.hdmi#1,
+    iot:enumeration = iot-purpose:band.hdmi#2,
+    iot:enumeration = iot-purpose:band.browser,
+    iot:enumeration = iot-purpose:band.camera,
+    iot:enumeration = iot-purpose:band.info.guide,
+    iot:enumeration = iot-purpose:band.info.notifications,
+    iot:enumeration = iot-purpose:band.service.anyplace-tv,
+    iot:enumeration = iot-purpose:band.service.cinemanow,
+    iot:enumeration = iot-purpose:band.service.crackle,
+    iot:enumeration = iot-purpose:band.service.netflix,
+    iot:enumeration = iot-purpose:band.service.youtube,
+    iot:enumeration = iot-purpose:band.service.miracast,
+    iot:enumeration = iot-purpose:band.service.smartshare
+ATTRIBUTE channel WITH
+    schema:name = "value",
+    iot:purpose = iot-purpose:value,
+    iot:type = iot:type.integer,
+    iot:minimum = 1
+ATTRIBUTE volume WITH
+    schema:name = "volume",
+    iot:purpose = iot-purpose:volume,
+    iot:type = iot:type.number,
+    iot:unit = iot-unit:math.fraction.percent,
+    iot:minimum = 0,
+    iot:maximum = 100
+ATTRIBUTE mute WITH
+    schema:name = "mute",
+    iot:purpose = iot-purpose:mute,
+    iot:type = iot:type.boolean
+;
