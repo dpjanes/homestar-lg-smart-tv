@@ -6,42 +6,9 @@
  *  2014-12-09
  */
 
-var iotdb = require("iotdb");
-var _ = iotdb._;
-
-exports.Model = iotdb.make_model('LGSmartTV')
-    .facet(":media.tv")
-    .product("http://www.lg.com/us/experience-tvs/smart-tv")
-    .name("LG Smart TV (WebOs)")
-    .io("band",
-        iotdb
-        .make_string(":band")
-        .enumeration(_.ld.expand([
-            "iot-purpose:band.tv",
-            "iot-purpose:band.hdmi",
-            "iot-purpose:band.hdmi#1",
-            "iot-purpose:band.hdmi#2",
-            "iot-purpose:band.browser",
-            "iot-purpose:band.camera",
-            "iot-purpose:band.info.guide",
-            "iot-purpose:band.info.notifications",
-            "iot-purpose:band.service.anyplace-tv",
-            "iot-purpose:band.service.cinemanow",
-            "iot-purpose:band.service.crackle",
-            "iot-purpose:band.service.netflix",
-            "iot-purpose:band.service.youtube",
-            "iot-purpose:band.service.miracast",
-            "iot-purpose:band.service.smartshare",
-        ]))
-    )
-    .io("channel", iotdb.integer.channel)
-    .io("volume", iotdb.number.percent.volume)
-    .io("mute", iotdb.boolean.mute)
-    .make();
-
 exports.binding = {
     bridge: require('../LGSmartTVBridge').Bridge,
-    model: exports.Model,
+    model: require('./LgSmartTv.json'),
     mapping: {
         band: {
             "iot-purpose:band.service.anyplace-tv": "anyplace.tv",

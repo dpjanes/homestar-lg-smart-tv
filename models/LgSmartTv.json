@@ -18,6 +18,10 @@
       "@id": "https://iotdb.org/pub/iot#type",
       "@type": "@id"
     },
+    "iot:enumeration": {
+      "@id": "https://iotdb.org/pub/iot#enumeration",
+      "@type": "@id"
+    },
     "iot-unit": "https://iotdb.org/pub/iot-unit#",
     "iot:unit": {
       "@id": "https://iotdb.org/pub/iot#unit",
@@ -38,8 +42,27 @@
       "schema:name": "band",
       "iot:purpose": "iot-purpose:band",
       "iot:type": "iot:type.string",
+      "iot:enumeration": [
+        "iot-purpose:band.tv",
+        "iot-purpose:band.hdmi",
+        "iot-purpose:band.hdmi#1",
+        "iot-purpose:band.hdmi#2",
+        "iot-purpose:band.browser",
+        "iot-purpose:band.camera",
+        "iot-purpose:band.info.guide",
+        "iot-purpose:band.info.notifications",
+        "iot-purpose:band.service.anyplace-tv",
+        "iot-purpose:band.service.cinemanow",
+        "iot-purpose:band.service.crackle",
+        "iot-purpose:band.service.netflix",
+        "iot-purpose:band.service.youtube",
+        "iot-purpose:band.service.miracast",
+        "iot-purpose:band.service.smartshare"
+      ],
       "iot:read": true,
-      "iot:write": true
+      "iot:write": true,
+      "iot:sensor": true,
+      "iot:actuator": true
     },
     {
       "@type": "iot:Attribute",
@@ -49,7 +72,9 @@
       "iot:type": "iot:type.integer",
       "iot:minimum": 1,
       "iot:read": true,
-      "iot:write": true
+      "iot:write": true,
+      "iot:sensor": true,
+      "iot:actuator": true
     },
     {
       "@type": "iot:Attribute",
@@ -61,7 +86,9 @@
       "iot:minimum": 0,
       "iot:maximum": 100,
       "iot:read": true,
-      "iot:write": true
+      "iot:write": true,
+      "iot:sensor": true,
+      "iot:actuator": true
     },
     {
       "@type": "iot:Attribute",
@@ -70,7 +97,9 @@
       "iot:purpose": "iot-purpose:mute",
       "iot:type": "iot:type.boolean",
       "iot:read": true,
-      "iot:write": true
+      "iot:write": true,
+      "iot:sensor": true,
+      "iot:actuator": true
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 Connect and control LG SmartTV with HomeStar and IOTDB. 
 
-<img src="https://github.com/dpjanes/iotdb-homestar/blob/master/docs/HomeStar.png" align="right" />
+<img src="https://raw.githubusercontent.com/dpjanes/iotdb-homestar/master/docs/HomeStar.png" align="right" />
 
 Note that we can't turn these _on_ because when the
 TV is off it's not on the Internet.
@@ -13,10 +13,9 @@ and <code>iotdb.js</code> for use inside IOTDB.
 
 # Installation
 
-Install Home☆Star first. 
-See: https://github.com/dpjanes/iotdb-homestar#installation
+[Install Home☆Star first](https://homestar.io/about/install).
 
-Then
+Then:
 
     $ homestar install homestar-lg-smart-tv
 

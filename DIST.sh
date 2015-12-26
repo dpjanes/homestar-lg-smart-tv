@@ -31,11 +31,11 @@ echo "=================="
 
     tar cf - \
         README.md LICENSE homestar.json package.json \
-        *.js \
+        LGSmartTVBridge.js index.js \
+        lg-client.js lg-commands.js lg-finder.js \
+        models/*.js models/*.json \
         |
     ( cd "${NPM_DST}" && tar xvf - )
-
-    ## cp dist/*.* "${NPM_DST}" || exit 1
 
     cd "${NPM_DST}" || exit 1
     npm publish
