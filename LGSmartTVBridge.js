@@ -24,12 +24,11 @@
 
 var iotdb = require('iotdb');
 var _ = iotdb._;
-var bunyan = iotdb.bunyan;
 
 var LGClient = require('./lg-client').LGClient;
 var LG = require('./lg-commands');
 
-var logger = bunyan.createLogger({
+var logger = iotdb.logger({
     name: 'homestar-lg-smart-tv',
     module: 'LGSmartTVBridge',
 });

@@ -15,13 +15,12 @@
  */
 
 var iotdb = require('iotdb');
-var bunyan = iotdb.bunyan;
 
 var events = require('events');
 var WebSocket = require('ws');
 var util = require('util');
 
-var logger = bunyan.createLogger({
+var logger = iotdb.logger({
     name: 'homestar-lg-smart-tv',
     module: 'lg-finder',
 });
