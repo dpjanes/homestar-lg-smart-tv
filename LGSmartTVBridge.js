@@ -73,7 +73,7 @@ LGSmartTVBridge.prototype.name = function () {
 LGSmartTVBridge.prototype.discover = function () {
     var self = this;
 
-    var cp = iotdb.module("iotdb-upnp").control_point();
+    var cp = require("iotdb-upnp").control_point();
 
     cp.on("device", function (native) {
         if (native.deviceType !== 'urn:schemas-upnp-org:device:Basic:1') {
