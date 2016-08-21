@@ -5,12 +5,12 @@
 
 "use strict";
 
-var iotdb = require("iotdb");
-var _ = iotdb._;
+const iotdb = require("iotdb");
+const _ = iotdb._;
 
-var ModelBinding = require('../models/LGSmartTV');
+const ModelBinding = require('../models/LGSmartTV');
 
-var wrapper = _.bridge_wrapper(ModelBinding.binding);
+const wrapper = _.bridge_wrapper(ModelBinding.binding);
 wrapper.on('bridge', function (bridge) {
     console.log("+ discovered\n ", _.ld.compact(bridge.meta()));
     bridge.push({

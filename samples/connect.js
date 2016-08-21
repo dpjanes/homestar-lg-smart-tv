@@ -5,9 +5,9 @@
 
 "use strict";
 
-var LGSmartTVBridge = require('../LGSmartTVBridge').Bridge;
+const LGSmartTVBridge = require('../LGSmartTVBridge').Bridge;
 
-var tv = new LGSmartTVBridge();
+const tv = new LGSmartTVBridge();
 tv.discovered = function (bridge) {
     console.log("+ got one", bridge.meta());
     bridge.pulled = function (state) {

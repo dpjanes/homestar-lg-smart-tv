@@ -10,9 +10,9 @@ try {
     var model = require('../index');
 }
 
-var _ = model.iotdb._;
+const _ = model.iotdb._;
 
-var wrapper = model.wrap("LGSmartTV");
+const wrapper = model.wrap("LGSmartTV");
 wrapper.on('thing', function (model) {
     model.on("state", function (model) {
         console.log("+ state\n ", model.thing_id(), model.state("istate"));

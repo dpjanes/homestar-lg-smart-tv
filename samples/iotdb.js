@@ -6,10 +6,10 @@
 
 "use strict";
 
-var iotdb = require('iotdb');
-var iot = iotdb.iot();
+const iotdb = require('iotdb');
+iotdb.use("homestar-lg-smart-tv");
 
-var things = iot.connect('LGSmartTV');
+const things = iotdb.connect('LGSmartTV');
 /*
 things.set(":band", "iotdb-attribute:band.tv");
  */
