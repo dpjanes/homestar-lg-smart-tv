@@ -3,6 +3,8 @@
 
 <img src="https://raw.githubusercontent.com/dpjanes/iotdb-homestar/master/docs/HomeStar.png" align="right" />
 
+# About
+
 Note that we can't turn these _on_ because when the
 TV is off it's not on the Internet.
 
@@ -10,13 +12,15 @@ See <a href="samples/">the samples</a> for details how to add to your project,
 particularly <code>model.js</code> for use standalone
 and <code>iotdb.js</code> for use inside IOTDB.
 
-# Quick Start
+# Installation
 
-Install
+* [Read this first](https://github.com/dpjanes/node-iotdb/blob/master/docs/install.md)
 
-	$ npm install -g homestar ## with 'sudo' if error
-	$ homestar setup
-	$ homestar install homestar-lg-smart-tv
+Then:
+
+    $ npm install homestar-lg-smart-tv
+
+# Use
 
 Set the channel to 3
 
@@ -30,7 +34,8 @@ Go to HDMI
 
 	things.set(":band", "iot-purpose:band.hdmi")
 
-# LGSmartTV
+# Models
+## LGSmartTV
 
 * <code>volume</code>: integer from 0 to 100 (<code>iot-purpose:volume</code>)
 * <code>band</code>: string, see below (<code>iot-purpose:band</code>)
