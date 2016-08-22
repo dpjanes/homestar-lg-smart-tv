@@ -8,7 +8,7 @@
 
 exports.binding = {
     bridge: require('../LGSmartTVBridge').Bridge,
-    model: require('./LgSmartTv.json'),
+    model: require('./lg-smart-tv.json'),
     mapping: {
         band: {
             "iot-purpose:band.service.anyplace-tv": "anyplace.tv",
