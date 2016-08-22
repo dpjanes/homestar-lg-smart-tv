@@ -1,0 +1,106 @@
+{
+  "@context": {
+    "@base": "file:///lg-smart-tv",
+    "@vocab": "file:///lg-smart-tv#",
+    "iot": "https://iotdb.org/pub/iot#",
+    "iot-purpose": "https://iotdb.org/pub/iot-purpose#",
+    "iot:enumeration": {
+      "@id": "https://iotdb.org/pub/iot#enumeration",
+      "@type": "@id"
+    },
+    "iot:purpose": {
+      "@id": "https://iotdb.org/pub/iot#purpose",
+      "@type": "@id"
+    },
+    "iot:type": {
+      "@id": "https://iotdb.org/pub/iot#type",
+      "@type": "@id"
+    },
+    "schema": "http://schema.org/",
+    "iot-unit": "https://iotdb.org/pub/iot-unit#",
+    "iot:unit": {
+      "@id": "https://iotdb.org/pub/iot#unit",
+      "@type": "@id"
+    },
+    "iot-facet": "https://iotdb.org/pub/iot-facet#",
+    "iot:facet": {
+      "@id": "https://iotdb.org/pub/iot#facet",
+      "@type": "@id"
+    }
+  },
+  "@id": "",
+  "@type": "iot:Model",
+  "iot:attribute": [
+    {
+      "@id": "#band",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:enumeration": [
+        "iot-purpose:band.tv",
+        "iot-purpose:band.hdmi",
+        "iot-purpose:band.hdmi#1",
+        "iot-purpose:band.hdmi#2",
+        "iot-purpose:band.browser",
+        "iot-purpose:band.camera",
+        "iot-purpose:band.info.guide",
+        "iot-purpose:band.info.notifications",
+        "iot-purpose:band.service.anyplace-tv",
+        "iot-purpose:band.service.cinemanow",
+        "iot-purpose:band.service.crackle",
+        "iot-purpose:band.service.netflix",
+        "iot-purpose:band.service.youtube",
+        "iot-purpose:band.service.miracast",
+        "iot-purpose:band.service.smartshare"
+      ],
+      "iot:purpose": "iot-purpose:band",
+      "iot:read": true,
+      "iot:sensor": true,
+      "iot:type": "iot:type.string",
+      "iot:write": true,
+      "schema:name": "band"
+    },
+    {
+      "@id": "#channel",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:minimum": 1,
+      "iot:purpose": "iot-purpose:value",
+      "iot:read": true,
+      "iot:sensor": true,
+      "iot:type": "iot:type.integer",
+      "iot:write": true,
+      "schema:name": "value"
+    },
+    {
+      "@id": "#volume",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:maximum": 100,
+      "iot:minimum": 0,
+      "iot:purpose": "iot-purpose:volume",
+      "iot:read": true,
+      "iot:sensor": true,
+      "iot:type": "iot:type.number",
+      "iot:unit": "iot-unit:math.fraction.percent",
+      "iot:write": true,
+      "schema:name": "volume"
+    },
+    {
+      "@id": "#mute",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:purpose": "iot-purpose:mute",
+      "iot:read": true,
+      "iot:sensor": true,
+      "iot:type": "iot:type.boolean",
+      "iot:write": true,
+      "schema:name": "mute"
+    }
+  ],
+  "iot:facet": [
+    "iot-facet:media",
+    "iot-facet:media.tv"
+  ],
+  "iot:model-id": "lg-smart-tv",
+  "schema:name": "LG Smart TV (WebOs)"
+}
