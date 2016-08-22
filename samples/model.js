@@ -4,15 +4,12 @@
 
 "use strict";
 
-try {
-    var model = require('homestar-lg-smart-tv');
-} catch (x) {
-    var model = require('../index');
-}
+const iotdb = require("iotdb")
+const _ = iotdb._;
 
-const _ = model.iotdb._;
+const module = require('homestar-lg-smart-tv');
 
-const wrapper = model.wrap("LGSmartTV");
+const wrapper = _.bridge.wrap("LGSmartTV", module.bindings);
 wrapper.on('thing', function (model) {
     model.on("state", function (model) {
         console.log("+ state\n ", model.thing_id(), model.state("istate"));
