@@ -10,4 +10,4 @@ const iotdb = require('iotdb');
 iotdb.use("homestar-lg-smart-tv");
 
 const things = iotdb.connect('LGSmartTV');
-things.set(":band", "iotdb-attribute:band.tv");
+things.set(":band", "iot-purpose:band.tv");

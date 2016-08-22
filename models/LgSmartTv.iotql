@@ -6,21 +6,21 @@ ATTRIBUTE band WITH
     schema:name = "band",
     iot:purpose = iot-purpose:band,
     iot:type = iot:type.string,
-    iot:enumeration = iot-purpose:band.tv,
-    iot:enumeration = iot-purpose:band.hdmi,
-    iot:enumeration = iot-purpose:band.hdmi#1,
-    iot:enumeration = iot-purpose:band.hdmi#2,
-    iot:enumeration = iot-purpose:band.browser,
-    iot:enumeration = iot-purpose:band.camera,
-    iot:enumeration = iot-purpose:band.info.guide,
-    iot:enumeration = iot-purpose:band.info.notifications,
-    iot:enumeration = iot-purpose:band.service.anyplace-tv,
-    iot:enumeration = iot-purpose:band.service.cinemanow,
-    iot:enumeration = iot-purpose:band.service.crackle,
-    iot:enumeration = iot-purpose:band.service.netflix,
-    iot:enumeration = iot-purpose:band.service.youtube,
-    iot:enumeration = iot-purpose:band.service.miracast,
-    iot:enumeration = iot-purpose:band.service.smartshare
+    iot:enumeration = "anyplace.tv" AS iot-purpose:band.service.anyplace-tv,
+    iot:enumeration = "cinemanow" AS iot-purpose:band.service.cinemanow,
+    iot:enumeration = "com.webos.app.browser" AS iot-purpose:band.browser,
+    iot:enumeration = "com.webos.app.camera" AS iot-purpose:band.camera,
+    iot:enumeration = "com.webos.app.hdmi1" AS iot-purpose:band.hdmi,
+    iot:enumeration = "com.webos.app.hdmi1" AS iot-purpose:band.hdmi.1,
+    iot:enumeration = "com.webos.app.hdmi2" AS iot-purpose:band.hdmi.2,
+    iot:enumeration = "com.webos.app.livetv" AS iot-purpose:band.tv,
+    iot:enumeration = "com.webos.app.miracast" AS iot-purpose:band.service.miracast,
+    iot:enumeration = "com.webos.app.notificationcenter" AS iot-purpose:band.info.notifications,
+    iot:enumeration = "com.webos.app.smartshare" AS iot-purpose:band.service.smartshare,
+    iot:enumeration = "com.webos.app.tvuserguide" AS iot-purpose:band.info.guide,
+    iot:enumeration = "crackle" AS iot-purpose:band.service.crackle,
+    iot:enumeration = "netflix" AS iot-purpose:band.service.netflix,
+    iot:enumeration = "youtube.leanback.v4" AS iot-purpose:band.service.youtube
 ATTRIBUTE channel WITH
     schema:name = "value",
     iot:purpose = iot-purpose:value,
@@ -38,3 +38,5 @@ ATTRIBUTE mute WITH
     iot:purpose = iot-purpose:mute,
     iot:type = iot:type.boolean
 ;
+
+

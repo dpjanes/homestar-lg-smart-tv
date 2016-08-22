@@ -11,6 +11,6 @@ iotdb.use("homestar-lg-smart-tv");
 
 const things = iotdb.connect('LGSmartTV');
 things.update("ostate", {
-    volume: 35,
-    band: "iot-purpose:band.tv",
+    volume: 25,
+    band: "com.webos.app.hdmi1",
 });
