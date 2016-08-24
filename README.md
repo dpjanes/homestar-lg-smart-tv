@@ -12,6 +12,8 @@ See <a href="samples/">the samples</a> for details how to add to your project,
 particularly <code>model.js</code> for use standalone
 and <code>iotdb.js</code> for use inside IOTDB.
 
+* [Read about Bridges](https://github.com/dpjanes/node-iotdb/blob/master/docs/bridges.md)
+
 # Installation
 
 * [Read this first](https://github.com/dpjanes/node-iotdb/blob/master/docs/install.md)
