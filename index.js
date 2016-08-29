@@ -26,3 +26,5 @@ exports.Bridge = require('./LGSmartTVBridge').Bridge;
 exports.bindings = [
     require('./models/LGSmartTV').binding,
 ];
+
+exports.module_folder = __dirname;
