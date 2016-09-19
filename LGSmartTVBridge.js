@@ -172,6 +172,22 @@ LGSmartTVBridge.prototype.push = function (pushd, done) {
     try {
         _doing();
 
+        if (pushd.off !== undefined) {
+            self._queue("turn-off", function (client) {
+                LG.turnOff(client, function (error, d) {
+                    logger.info({
+                        method: "push/connect/turnOff",
+                        unique_id: self.unique_id,
+                    }, "called");
+
+                    _done();
+                });
+            });
+
+            _done();
+            return;
+        }
+
         if (pushd.band !== undefined) {
             var launch = pushd.band.toLowerCase();
             if (launch === "hdmi1") {

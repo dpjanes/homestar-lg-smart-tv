@@ -13,6 +13,7 @@ particularly <code>model.js</code> for use standalone
 and <code>iotdb.js</code> for use inside IOTDB.
 
 * [Read about Bridges](https://github.com/dpjanes/node-iotdb/blob/master/docs/bridges.md)
+* [Related Java code](https://github.com/ConnectSDK/Connect-SDK-Android-Core/blob/master/src/com/connectsdk/service/WebOSTVService.java) (for developers)
 
 # Installation
 

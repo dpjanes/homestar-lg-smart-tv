@@ -140,3 +140,10 @@ exports.launch = function (client, id, callback) {
         id: id
     }, callback);
 };
+
+/**
+ *  Turn off
+ */
+exports.turnOff = function (client, callback) {
+    _lg_doit(client, 'ssap://system/turnOff', {}, callback);
+};

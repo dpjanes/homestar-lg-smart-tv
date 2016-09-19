@@ -24,7 +24,9 @@ ATTRIBUTE band WITH
 ATTRIBUTE off WITH
     schema:name = "off",
     iot:purpose = iot-purpose:on.false,
-    iot:type = iot:type.null
+    iot:type = iot:type.null,
+    iot:instantaneous = true,
+    iot:actuator = true
 ATTRIBUTE channel WITH
     schema:name = "value",
     iot:purpose = iot-purpose:value,

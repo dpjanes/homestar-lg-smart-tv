@@ -56,6 +56,18 @@
       "schema:name": "band"
     },
     {
+      "@id": "#off",
+      "@type": "iot:Attribute",
+      "iot:actuator": true,
+      "iot:instantaneous": true,
+      "iot:purpose": "iot-purpose:on.false",
+      "iot:read": false,
+      "iot:sensor": false,
+      "iot:type": "iot:type.null",
+      "iot:write": true,
+      "schema:name": "off"
+    },
+    {
       "@id": "#channel",
       "@type": "iot:Attribute",
       "iot:actuator": true,
