@@ -22,13 +22,13 @@
 
 "use strict";
 
-var iotdb = require('iotdb');
-var _ = iotdb._;
+const iotdb = require('iotdb');
+const _ = iotdb._;
 
-var LGClient = require('./lg-client').LGClient;
-var LG = require('./lg-commands');
+const LGClient = require('./lg-client').LGClient;
+const LG = require('./lg-commands');
 
-var logger = iotdb.logger({
+const logger = iotdb.logger({
     name: 'homestar-lg-smart-tv',
     module: 'LGSmartTVBridge',
 });
@@ -39,8 +39,8 @@ var logger = iotdb.logger({
  *  @param {object|undefined} native
  *  only used for instances, should be 
  */
-var LGSmartTVBridge = function (initd, native) {
-    var self = this;
+const LGSmartTVBridge = function (initd, native) {
+    const self = this;
 
     self.initd = _.defaults(initd,
         iotdb.keystore().get("bridges/LGSmartTVBridge/initd"), {
@@ -67,7 +67,7 @@ LGSmartTVBridge.prototype = new iotdb.Bridge();
  *  See {iotdb.bridge.Bridge#discover} for documentation.
  */
 LGSmartTVBridge.prototype.discover = function () {
-    var self = this;
+    const self = this;
 
     var cp = require("iotdb-upnp").control_point();
 
@@ -92,7 +92,7 @@ LGSmartTVBridge.prototype.discover = function () {
  *  See {iotdb.bridge.Bridge#connect} for documentation.
  */
 LGSmartTVBridge.prototype.connect = function (connectd) {
-    var self = this;
+    const self = this;
     if (!self.native) {
         return;
     }
@@ -104,7 +104,7 @@ LGSmartTVBridge.prototype.connect = function (connectd) {
 };
 
 LGSmartTVBridge.prototype._setup_polling = function () {
-    var self = this;
+    const self = this;
     if (!self.initd.poll) {
         return;
     }
@@ -120,7 +120,7 @@ LGSmartTVBridge.prototype._setup_polling = function () {
 };
 
 LGSmartTVBridge.prototype._forget = function () {
-    var self = this;
+    const self = this;
     if (!self.native) {
         return;
     }
@@ -137,7 +137,7 @@ LGSmartTVBridge.prototype._forget = function () {
  *  See {iotdb.bridge.Bridge#disconnect} for documentation.
  */
 LGSmartTVBridge.prototype.disconnect = function () {
-    var self = this;
+    const self = this;
     if (!self.native || !self.native) {
         return;
     }
@@ -151,7 +151,7 @@ LGSmartTVBridge.prototype.disconnect = function () {
  *  See {iotdb.bridge.Bridge#push} for documentation.
  */
 LGSmartTVBridge.prototype.push = function (pushd, done) {
-    var self = this;
+    const self = this;
     if (!self.native) {
         done(new Error("not connected"));
         return;
@@ -287,7 +287,7 @@ LGSmartTVBridge.prototype.push = function (pushd, done) {
  *  See {iotdb.bridge.Bridge#pull} for documentation.
  */
 LGSmartTVBridge.prototype.pull = function () {
-    var self = this;
+    const self = this;
     if (!self.native) {
         return;
     }
@@ -377,7 +377,7 @@ LGSmartTVBridge.prototype.pull = function () {
  *  See {iotdb.bridge.Bridge#meta} for documentation.
  */
 LGSmartTVBridge.prototype.meta = function () {
-    var self = this;
+    const self = this;
     if (!self.native) {
         return;
     }
@@ -406,14 +406,14 @@ LGSmartTVBridge.prototype.configure = function (app) {};
 
 /* -- internals -- */
 LGSmartTVBridge.prototype._queue = function (qid, f) {
-    var self = this;
+    const self = this;
 
     self.queued[qid] = f;
     self._run();
 };
 
 LGSmartTVBridge.prototype._run = function () {
-    var self = this;
+    const self = this;
 
     // anything queued?
     var f = null;
