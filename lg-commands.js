@@ -16,21 +16,18 @@
 
 "use strict";
 
-var iotdb = require('iotdb');
+const iotdb = require('iotdb');
 
-var events = require('events');
-var WebSocket = require('ws');
-var util = require('util');
+const events = require('events');
+const WebSocket = require('ws');
+const util = require('util');
 
-var logger = iotdb.logger({
+const logger = iotdb.logger({
     name: 'homestar-lg-smart-tv',
     module: 'lg-commands',
 });
 
-var LGFinder = require('./lg-finder').LGFinder;
-var LGClient = require('./lg-client').LGClient;
-
-var _lg_doit = function (client, request_id, paramd, callback) {
+const _lg_doit = function (client, request_id, paramd, callback) {
     client.sendRequest(request_id, paramd, function (error, response) {
         logger.info({
             method: "_lg_doit",

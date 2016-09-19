@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-var iotdb = require('iotdb');
+const iotdb = require('iotdb');
 
-var events = require('events');
-var WebSocket = require('ws');
-var util = require('util');
+const events = require('events');
+const WebSocket = require('ws');
+const util = require('util');
 
-var logger = iotdb.logger({
+const logger = iotdb.logger({
     name: 'homestar-lg-smart-tv',
     module: 'lg-client',
 });
 
-var LGClient = function (initd) {
+const LGClient = function (initd) {
     events.EventEmitter.call(this);
 
     this.client_key = null;
