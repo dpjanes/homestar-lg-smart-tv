@@ -17,7 +17,7 @@
         "grunt-jsbeautifier": "~0.2.13", 
         "jshint-stylish": "~2.2.1", 
         "load-grunt-tasks": "~3.5.2", 
-        "request": "~2.74.0"
+        "request": "~2.75.0"
     }, 
     "homepage": "https://homestar.io", 
     "homestar": {}, 
@@ -35,5 +35,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "0.1.15"
+    "version": "3.0.1"
 }
