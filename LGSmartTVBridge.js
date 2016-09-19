@@ -61,10 +61,6 @@ var LGSmartTVBridge = function (initd, native) {
 
 LGSmartTVBridge.prototype = new iotdb.Bridge();
 
-LGSmartTVBridge.prototype.name = function () {
-    return "LGSmartTVBridge";
-};
-
 /* --- lifecycle --- */
 
 /**
