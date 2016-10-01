@@ -36,7 +36,7 @@ const LGClient = function (initd) {
 
     this.ready = false;
     this.requestId = 1;
-    this.requests = {};
+    this.requestd = {};
     this.manifest = {
         permissions: [
             "APP_TO_APP",
@@ -82,14 +82,6 @@ LGClient.prototype.connect = function (ip, cb) {
         origin: "null"
     });
 
-    this.ws.on('error', function (error) {
-        logger.info({
-            method: "connect/on(error)",
-            error: _.error.message(error),
-            cause: "probably not your fault",
-        }, "unexpected websocket error");
-    });
-
     this.ws.on('open', function () {
         logger.info({
             method: "connect/on(open)",
@@ -122,7 +114,7 @@ LGClient.prototype.connect = function (ip, cb) {
             return;
         }
 
-        var request = message.id ? this.requests[message.id] : null;
+        var request = message.id ? this.requestd[message.id] : null;
 
         if (message.type === "response" || message.type === "error") {
             if (request) {
@@ -130,9 +122,7 @@ LGClient.prototype.connect = function (ip, cb) {
                     request.callback(message.error, message.payload);
                 }
 
-                if (!request.isSubscription) {
-                    delete this.requests[request];
-                }
+                delete this.requestd[message.id];
             }
         } else if (message.type === "registered") {
             this.emit('registered', message.payload['client-key']);
@@ -146,9 +136,15 @@ LGClient.prototype.connect = function (ip, cb) {
         }
     }.bind(this));
 
-    this.ws.on('error', function (err) {
+    this.ws.on('error', function (error) {
+        logger.info({
+            method: "connect/on(error)",
+            error: _.error.message(error),
+            cause: "probably not your fault",
+        }, "unexpected websocket error");
+
         this.ready = false;
-        this.emit('error', err);
+        this.emit('error', error);
     }.bind(this));
 
     this.ws.on('close', function () {
@@ -176,7 +172,7 @@ LGClient.prototype.sendRequest = function (uri, payload, cb) {
         payload: payload || {}
     });
 
-    this.requests[requestId] = {
+    this.requestd[requestId] = {
         callback: cb
     };
 };
