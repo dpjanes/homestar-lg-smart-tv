@@ -21,6 +21,12 @@ ATTRIBUTE band WITH
     iot:enumeration = "crackle" AS iot-purpose:band.service.crackle,
     iot:enumeration = "netflix" AS iot-purpose:band.service.netflix,
     iot:enumeration = "youtube.leanback.v4" AS iot-purpose:band.service.youtube
+ATTRIBUTE on WITH
+    schema:name = "on",
+    iot:purpose = iot-purpose:on,
+    iot:type = iot:type.boolean,
+    iot:sensor = true,
+    iot:actuator = false
 ATTRIBUTE off WITH
     schema:name = "off",
     iot:purpose = iot-purpose:on.false,

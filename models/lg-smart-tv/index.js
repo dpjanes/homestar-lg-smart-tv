@@ -7,6 +7,6 @@
  */
 
 exports.binding = {
-    bridge: require('../LGSmartTVBridge').Bridge,
-    model: require('./lg-smart-tv.json'),
+    bridge: require('../../LGSmartTVBridge').Bridge,
+    model: require('./model.json'),
 };
