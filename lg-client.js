@@ -15,6 +15,7 @@
  */
 
 const iotdb = require('iotdb');
+const _ = iotdb._;
 
 const events = require('events');
 const WebSocket = require('ws');
@@ -81,6 +82,14 @@ LGClient.prototype.connect = function (ip, cb) {
         origin: "null"
     });
 
+    this.ws.on('error', function (error) {
+        logger.info({
+            method: "connect/on(error)",
+            error: _.error.message(error),
+            cause: "probably not your fault",
+        }, "unexpected websocket error");
+    });
+
     this.ws.on('open', function () {
         logger.info({
             method: "connect/on(open)",
@@ -102,7 +111,16 @@ LGClient.prototype.connect = function (ip, cb) {
             data: data
         }, "called");
 
-        var message = JSON.parse(data);
+        try {
+            var message = JSON.parse(data);
+        } catch (x) {
+            logger.error({
+                method: "connect/on(message)",
+                data: data,
+                cause: "likely the TV is sending something weird",
+            }, "unexpected error parsing data - probably can be ignored");
+            return;
+        }
 
         var request = message.id ? this.requests[message.id] : null;
 
