@@ -83,12 +83,12 @@
       "@type": "iot:Attribute",
       "iot:actuator": true,
       "iot:minimum": 1,
-      "iot:purpose": "iot-purpose:value",
+      "iot:purpose": "iot-purpose:channel",
       "iot:read": true,
       "iot:sensor": true,
       "iot:type": "iot:type.integer",
       "iot:write": true,
-      "schema:name": "value"
+      "schema:name": "channel"
     },
     {
       "@id": "#volume",

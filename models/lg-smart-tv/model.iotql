@@ -34,8 +34,8 @@ ATTRIBUTE off WITH
     iot:instantaneous = true,
     iot:actuator = true
 ATTRIBUTE channel WITH
-    schema:name = "value",
-    iot:purpose = iot-purpose:value,
+    schema:name = "channel",
+    iot:purpose = iot-purpose:channel,
     iot:type = iot:type.integer,
     iot:minimum = 1
 ATTRIBUTE volume WITH
