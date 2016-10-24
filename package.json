@@ -25,7 +25,7 @@
     "main": "index.js", 
     "name": "homestar-lg-smart-tv", 
     "peerDependencies": {
-        "iotdb-upnp": "~0.0.14"
+        "iotdb-upnp": "~3.0.3"
     }, 
     "private": false, 
     "repository": {
@@ -35,5 +35,5 @@
     "scripts": {
         "test": "grunt"
     }, 
-    "version": "3.0.2"
+    "version": "3.0.3"
 }
